@@ -30,7 +30,7 @@ elsif user_choice == "D" && user_money >= 0.65
 elsif user_choice == "E" && user_money >= 0.55
     print "Thanks for purchasing candy through us.
     Please take your candy, and your $#{user_money-0.55} change!"
-elsif user_choice != ("A" || "B" || "C" || "D" )
+elsif user_choice != "A" || user_choice != "B" || user_choice != "C" || user_choice != "D" || user_choice != "E"
     print "Sorry, we don't have that here. Go elsewhere"
 else
     print "You're broke. Take your $#{user_money} and go elsewhere."
