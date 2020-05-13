@@ -33,39 +33,35 @@ all_numbers = {
 # the number of times that the number in key was generated randomly by the program
 # and the number of times that the number in key was provided by the user.
 
-common_numbers = Hash.new({})
-# common_numbers.default = {} # makes the default key an empty hash
+common_numbers = {}
 
-
-# frequency of number is counted using "array.count(value)". (Asks how many times does that value appear in the array)
-# all_numbers.values returns an array of all the values. All 10 of the numbers
 # iterate through each value of the array and determine how many times it was generated and how many times entered by user
 
-all_random_values.each do |given_value|
-    frequency_of_number = {}
-    # puts"given_value #{given_value}"
-    frequency_of_number[:random_frequency] = all_random_values.count(given_value) 
-    # puts "frequency in random: #{all_random_values.count(given_value)}"
-    frequency_of_number[:input_frequency] = all_input_values.count(given_value)
-    # puts "frequency in input: #{all_input_values.count(given_value)}"
-    common_numbers[given_value] = frequency_of_number
-    # puts common_numbers
 
+all_random_values.each do |random_value|
+    if common_numbers[random_value] == nil
+
+    common_numbers[random_value] = {
+        random_frequency: 1,
+        input_frequency: 0
+    }
+
+    else
+        common_numbers[random_value][:random_frequency] += 1
+    end
 end
 
 
 all_input_values.each do |input_value|
-    frequency_of_number = {}
-    # puts"input_value #{input_value}"
-    frequency_of_number[:random_frequency] = all_random_values.count(input_value)
-    # puts "frequency in random: #{all_random_values.count(input_value)}"
-    frequency_of_number[:input_frequency] = all_input_values.count(input_value)
-    # puts "frequency in input: #{all_input_values.count(input_value)}"
-    common_numbers[input_value] = frequency_of_number
-    # puts "Frequency of number #{frequency_of_number}"
-    # puts common_numbers[input_value]
+    if common_numbers[input_value] == nil
+    common_numbers[input_value] = {
+        random_frequency: 0,
+        input_frequency: 1
+    }
+    else
+        common_numbers[input_value][:input_frequency] += 1
+    end
 end
-
 
 
 3.times do
@@ -88,13 +84,13 @@ end
     end
 
     puts "Using only the second hash:"
-    if common_numbers[number_requested] == {}
+    if common_numbers[number_requested] == nil || common_numbers[number_requested][:random_frequency] == 0 
         puts "The number, #{number_requested}, did not show in the randomly generated numbers."
     else
         puts "The number, #{number_requested}, shows up #{common_numbers[number_requested][:random_frequency]} time(s) in the randomly generated numbers."
     end
 
-    if common_numbers[number_requested] == {}
+    if common_numbers[number_requested] == nil || common_numbers[number_requested][:input_frequency] == 0
         puts "The number, #{number_requested}, was not provided by the user earlier."
     else
         puts "The number, #{number_requested}, was provided #{common_numbers[number_requested][:input_frequency]} time(s) by the user earlier."
