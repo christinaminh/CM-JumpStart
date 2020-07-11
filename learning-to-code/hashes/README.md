@@ -101,6 +101,14 @@ my_hash = Hash.new("def")
 my_hash["gibberish"] # => "def"
 ```
 
+```ruby
+my_hash = {}
+my_hash.default = {}
+# By creating a hash with a default value,
+# all data retrievals will return the default value if not specified otherwise
+my_hash["gibberish"] # => {} an empty hash
+```
+
 ### Accessing Data
 
 To access data from within a hash, we use a syntax that is similar to accessing data in an Array. The difference is that we use the strings or symbols that correspond to the key to retrieve the associated value.
